@@ -1,5 +1,5 @@
 # Code-For-Practice
-contest1 = C. Сортировки
+contest1 = C. Сортировки\n
 contest2 = C. Быстрые треугольники
 contest3 = C. Непростой кузнечик
 contest4 = B. Максимумы
