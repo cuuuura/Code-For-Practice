@@ -1,32 +1,33 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
  
 using namespace std;
  
-const int MOD = 1000000007;
- 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    int n;
+    cin >> n;
+    vector<long long> a(n);
+    for (int i = 0; i < n; ++i) 
+        cin >> a[i];
  
-    int l, r;
-    cin >> l >> r;
+    sort(a.begin(), a.end());
  
-    vector<int> dp(r + 1, 0);
-    dp[1] = 1;
- 
-    for (int i = 1; i <= r; ++i) {
-        if (dp[i] == 0) continue;
-        for (int j = 2*i; j <= r; j += i) {
-            dp[j] += dp[i];
+    long long ans = 0;
+    
+    for (int i = 0; i < n - 2; ++i) {
+        int p = i + 2; 
+        for (int j = i + 1; j < n - 1; ++j) {
+            if (p < j + 1) 
+                p = j + 1;
+            
+            while (p < n && a[p] < a[i] + a[j]) {
+                ++p;
+            }
+            ans += p - (j + 1);
         }
     }
  
-    long long ans = 0;
-    for (int x = l; x <= r; ++x) {
-        ans += dp[x];
-    }
- 
-    cout << ans % MOD << '\n';
+    cout << ans << endl;
     return 0;
 }
